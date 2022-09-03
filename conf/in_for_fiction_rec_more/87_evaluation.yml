@@ -1,0 +1,47 @@
+type: single # single|window, maybe add opt
+key: baselines_and_models_and_hybrids #added to the csv names
+evaluation: evaluation #evaluation|evaluation_last|evaluation_multiple|evaluation_user_based|evaluation_user_based_multiple
+evaluation_by_algorithm_self: True
+data:
+  name: fiction #added in the end of the csv names
+  folder: /data/ceph/yuncongli/fiction-recommendation/session-rec-pytorch-private/data/fiction-with-attributes/prepared/
+#  folder: data/fiction-with-attributes/prepared/
+  prefix: fiction.dat.small.clicks.interaction_attributes
+#  slices: 5 #only window
+#  skip: [0,3] #only window
+  opts: {train_full_train_valid_test: True}
+
+results:
+  folder: /data/ceph/yuncongli/fiction-recommendation/session-rec-pytorch-private/results/next/fiction-with-attributes/
+#  folder: results/next/fiction-with-attributes/
+
+metrics:
+- class: accuracy.HitRate
+  length: [1,3,5,10,15,20]
+- class: accuracy.MRR
+  length: [1,3,5,10,15,20]
+- class: accuracy_multiple.NDCG
+  length: [1,3,5,10,15,20]
+- class: coverage.Coverage
+  length: [20]
+- class: popularity.Popularity
+  length: [20]
+- class: saver.Saver
+  length: [50]
+- class: time_memory_usage.Time_usage_training
+- class: time_memory_usage.Time_usage_testing
+#- class: time_memory_usage.Memory_usage
+
+algorithms:
+# ex with parameters
+# models
+- class: models_for_fiction_rec.models_for_fiction_rec.BaseModelForFictionRec
+  params: {batch_size: 1024, epochs: 10, embedding_size: 128, hidden_size: 128, attribute_embedding_size: 32,
+           features: 'item_count',
+           top: '1,3,5,10,20', debug: False, model_version: 'v4', dot_product: True, train: False, evaluation: True,
+           'other_args': {repeat_mask: 'item_mask',
+                          weight_loss: 'weight_label', weight_loss_weight: 1.0,
+                          decoder_activation_function: 'threshold', threshold: 0.0
+                         }
+          }
+  key: 87s # from 56
