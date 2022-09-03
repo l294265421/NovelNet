@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 .idea
-data
+data/fiction-with-attributes*
 rar_base_dir
 results

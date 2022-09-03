@@ -27,5 +27,10 @@ tables==3.6.1
 scikit-optimize==0.8.1 
 python-telegram-bot==13.5
 
+## Dataset
+Datasets can be downloaded from: https://www.dropbox.com/sh/ur9amfhf9mag213/AAAtI7SWJft1WZZiR03nyDNCa?dl=0.
+- Unzip the dataset file to the data folder.
+
 ## Running NovelNet
 python run_confg.py conf/in_for_fiction_rec_more/84.yml conf/out
+
