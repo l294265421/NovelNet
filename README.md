@@ -5,6 +5,7 @@ We implemented our model based on the session-recommedndation framework [session
 
 ## Requirements
 anaconda
+python==3.7.1
 torch==1.4.0 
 scipy==1.6.2 
 python-dateutil==2.8.1 
