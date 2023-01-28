@@ -88,12 +88,14 @@ class CumulativeTrainer(object):
 
     def train_epoch(self, method, train_dataset, train_collate_fn, batch_size, epoch, optimizer, scheduler=None):
         self.model.train()
-        if torch.cuda.is_available():
-            sampler = DistributedSampler(train_dataset)
-            sampler.set_epoch(epoch)
-            train_loader = torch.utils.data.DataLoader(train_dataset, collate_fn=train_collate_fn, batch_size=batch_size, sampler=sampler, pin_memory=True)
-        else:
-            train_loader = torch.utils.data.DataLoader(train_dataset, collate_fn=train_collate_fn, batch_size=batch_size, shuffle=True, pin_memory=True)
+        # if torch.cuda.is_available():
+        #     sampler = DistributedSampler(train_dataset)
+        #     sampler.set_epoch(epoch)
+        #     train_loader = torch.utils.data.DataLoader(train_dataset, collate_fn=train_collate_fn, batch_size=batch_size, sampler=sampler, pin_memory=True)
+        # else:
+        #     train_loader = torch.utils.data.DataLoader(train_dataset, collate_fn=train_collate_fn, batch_size=batch_size, shuffle=True, pin_memory=True)
+        train_loader = torch.utils.data.DataLoader(train_dataset, collate_fn=train_collate_fn, batch_size=batch_size,
+                                                   shuffle=True, pin_memory=True)
 
         start_time = time.time()
         count_batch=0
@@ -135,11 +137,13 @@ class CumulativeTrainer(object):
     def predict(self, method, dataset, collate_fn, batch_size, epoch, output_path):
         rs=[]
         with torch.no_grad():
-            if torch.cuda.is_available():
-                sampler = DistributedSampler(dataset, shuffle=False)
-                test_loader = torch.utils.data.DataLoader(dataset, collate_fn=collate_fn, batch_size=batch_size, sampler=sampler, pin_memory=True)
-            else:
-                test_loader = torch.utils.data.DataLoader(dataset, collate_fn=collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True)
+            # if torch.cuda.is_available():
+            #     sampler = DistributedSampler(dataset, shuffle=False)
+            #     test_loader = torch.utils.data.DataLoader(dataset, collate_fn=collate_fn, batch_size=batch_size, sampler=sampler, pin_memory=True)
+            # else:
+            #     test_loader = torch.utils.data.DataLoader(dataset, collate_fn=collate_fn, batch_size=batch_size, shuffle=False, pin_memory=True)
+            test_loader = torch.utils.data.DataLoader(dataset, collate_fn=collate_fn, batch_size=batch_size,
+                                                      shuffle=False, pin_memory=True)
 
             for k, data in enumerate(test_loader, 0):
                 if torch.cuda.is_available():
