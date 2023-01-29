@@ -35,6 +35,9 @@ Datasets can be downloaded from: https://www.dropbox.com/sh/ur9amfhf9mag213/AAAt
 ## Running NovelNet
 python run_confg.py conf/in_for_fiction_rec_more/84.yml conf/out
 
+## Tips
+- We only run the code using CPU. The configured RAM is 30G. 
+
 ## Citation
 ```
 @inproceedings{10.1145/3523227.3546762,
