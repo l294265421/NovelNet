@@ -4,7 +4,7 @@ evaluation: evaluation #evaluation|evaluation_last|evaluation_multiple|evaluatio
 evaluation_by_algorithm_self: True
 data:
   name: fiction #added in the end of the csv names
-  folder: /data/ceph/yuncongli/fiction-recommendation/session-rec-pytorch-private/data/fiction-with-attributes/prepared/
+  folder: data/fiction-with-attributes/prepared/
 #  folder: data/fiction-with-attributes/prepared/
   prefix: fiction.dat.small.clicks.interaction_attributes
 #  slices: 5 #only window
@@ -12,7 +12,7 @@ data:
   opts: {train_full_train_valid_test: True}
 
 results:
-  folder: /data/ceph/yuncongli/fiction-recommendation/session-rec-pytorch-private/results/next/fiction-with-attributes/
+  folder: results/next/fiction-with-attributes/
 #  folder: results/next/fiction-with-attributes/
 
 metrics:
